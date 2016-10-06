@@ -10,8 +10,10 @@ namespace _11_Files
             this.NumShares = howMany;
         }
 
-        public Stock() : this("", 0.0, 0) {
+        public Stock() : this("", 0.0, 0)  {
         }
+
+        
         public int NumShares { get; internal set; }
         public double PricePerShare { get; internal set; }
         public string Symbol { get; internal set; }

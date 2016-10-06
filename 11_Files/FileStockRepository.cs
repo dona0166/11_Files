@@ -13,7 +13,7 @@ namespace _11_Files
         public TextWriter thewriter;
         Dictionary<long, Stock> adictionary = new Dictionary<long, Stock>();
         List<long> alist = new List<long>();
-        Stock astock;
+        Stock somestock;
         
         public FileStockRepository(DirectoryInfo repositoryDir)
         {
@@ -53,16 +53,22 @@ namespace _11_Files
         public void SaveStock(Stock astock)
         {
             astock.Id = counter;
-            thewriter = File.CreateText(repositoryDir + "\\" + StockFileName(astock));
+            thewriter = File.CreateText(repositoryDir + StockFileName(astock));
+            thewriter.Close();
             adictionary[astock.Id] = astock;
+            //newname = "new" + astock.Symbol.Substring(0, 1).ToUpper() + astock.Symbol.Substring(1);
             NextId();
             
             
         }
 
+        string newname = "";
         public Stock LoadStock(long anid)
         {
-            return adictionary[anid];
+            
+            adictionary[anid].Symbol = "new" + adictionary[anid].Symbol.Substring(0, 1).ToUpper() + adictionary[anid].Symbol.Substring(1);
+            somestock = adictionary[anid];
+            
         }
 
 
