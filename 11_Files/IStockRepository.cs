@@ -6,9 +6,7 @@ namespace _11_Files
     internal interface IStockRepository
     {
         long NextId();
-        //void SaveStock(Stock astock);
-        //Stock LoadStock(long id);
-        //ICollection FindAllStocks();
-        //void Clear();
+        void SaveStock(Stock astock);
+        Stock LoadStock(long id);
     }
 }

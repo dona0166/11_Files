@@ -2,6 +2,12 @@
 {
     internal interface IFileRepository
     {
-        StockFileName(int);
+        string StockFileName(Stock astock);
+
+        string StockFileName(long astick);
+
+        void SaveStock(Stock astock);
+
+        
     }
 }

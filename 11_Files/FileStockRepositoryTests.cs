@@ -10,7 +10,7 @@ namespace _11_Files
     {
         Stock hp = new Stock("HP", 11.4, 10);
         Stock yhoo = new Stock("YHOO", 57.2, 30);
-        DirectoryInfo repositoryDir = new DirectoryInfo("C:\\Users\\Donnie\\Desktop\\1.-year-Programming\\TDD-Intro\\11_Files");
+        DirectoryInfo repositoryDir = new DirectoryInfo("mydata\\");
 
         [TestMethod]
         public void CanGetAndSetStockId()
@@ -49,28 +49,28 @@ namespace _11_Files
             Assert.AreEqual("stock456.txt", repository.StockFileName(hp));
         }
 
-        //[TestMethod]
-        //public void CanSaveStockWritesToFile()
-        //{
-        //    IFileRepository repository = new FileStockRepository(repositoryDir);
-        //    repository.SaveStock(yhoo);
-        //    Assert.IsFalse(yhoo.Id == 0);
-        //    FileInfo fileYhoo = new FileInfo(repositoryDir + repository.StockFileName(yhoo));
-        //    Assert.IsTrue(fileYhoo.Exists);
-        //}
+        [TestMethod]
+        public void CanSaveStockWritesToFile()
+        {
+            IFileRepository repository = new FileStockRepository(repositoryDir);
+            repository.SaveStock(yhoo);
+            Assert.IsFalse(yhoo.Id == 0);
+            FileInfo fileYhoo = new FileInfo(repositoryDir + repository.StockFileName(yhoo));
+            Assert.IsTrue(fileYhoo.Exists);
+        }
 
-        //[TestMethod]
-        //public void CanSaveAndLoad()
-        //{
-        //    IStockRepository repository = new FileStockRepository(repositoryDir);
-        //    repository.SaveStock(yhoo);
-        //    long id = yhoo.Id;
+        [TestMethod]
+        public void CanSaveAndLoad()
+        {
+            IStockRepository repository = new FileStockRepository(repositoryDir);
+            repository.SaveStock(yhoo);
+            long id = yhoo.Id;
 
-        //    IStockRepository differentRepository = new FileStockRepository(repositoryDir);
-        //    Stock newYhoo = differentRepository.LoadStock(id);
+            IStockRepository differentRepository = new FileStockRepository(repositoryDir);
+            Stock newYhoo = differentRepository.LoadStock(id);
 
-        //    Assert.AreEqual(yhoo, newYhoo);
-        //}
+            Assert.AreEqual(yhoo, newYhoo);
+        }
 
         //[TestMethod]
         //public void CanSaveAfterChange()

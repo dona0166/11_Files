@@ -1,58 +1,72 @@
 ﻿using System.IO;
 using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 
 namespace _11_Files
 {
     internal class FileStockRepository : IStockRepository, IFileRepository
     {
         private DirectoryInfo repositoryDir;
-        public bool start = false;
-
+        public FileInfo afile;
+        public TextWriter thewriter;
+        Dictionary<long, Stock> adictionary = new Dictionary<long, Stock>();
+        List<long> alist = new List<long>();
+        Stock astock;
         
         public FileStockRepository(DirectoryInfo repositoryDir)
         {
             
             this.repositoryDir = repositoryDir;
             
-           
+
         }
         
-
         public FileStockRepository()
         {
             
         }
 
-        public int count = 0;
+        long counter = 1;
         public long NextId()
         {
             
-            count++;
+            counter++;
+            return counter;
             
-            //Convert.ToInt64(repositoryDir.Name + count.ToString());
+        }
+        
+        public string StockFileName(Stock astock)
+        {
 
-            return count;
+            return "stock" + astock.Id + ".txt";
+
+
+        }
+        public string StockFileName(long stocknum)
+        {
+
+            return "stock" + stocknum.ToString() + ".txt";
         }
 
-        //public void SaveStock(Stock astock)
-        //{
+        public void SaveStock(Stock astock)
+        {
+            astock.Id = counter;
+            thewriter = File.CreateText(repositoryDir + "\\" + StockFileName(astock));
+            adictionary[astock.Id] = astock;
+            NextId();
+            
+            
+        }
 
-        //}
+        public Stock LoadStock(long anid)
+        {
+            return adictionary[anid];
+        }
 
-        //public Stock LoadStock(long anid)
-        //{
 
-        //}
 
-        //public ICollection FindAllStocks()
-        //{
-
-        //}
-
-        //public void Clear()
-        //{
-
-        //}
 
 
     }
