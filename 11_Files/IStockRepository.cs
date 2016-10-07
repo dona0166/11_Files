@@ -8,5 +8,7 @@ namespace _11_Files
         long NextId();
         void SaveStock(Stock astock);
         Stock LoadStock(long id);
+        void Clear();
+        ICollection FindAllStocks();
     }
 }

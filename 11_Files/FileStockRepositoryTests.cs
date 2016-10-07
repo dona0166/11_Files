@@ -72,45 +72,46 @@ namespace _11_Files
             Assert.AreEqual(yhoo, newYhoo);
         }
 
-        //[TestMethod]
-        //public void CanSaveAfterChange()
-        //{
-        //    IStockRepository repository = new FileStockRepository(repositoryDir);
-        //    repository.SaveStock(yhoo);
-        //    yhoo.NumShares = 120;
-        //    repository.SaveStock(yhoo);
+        [TestMethod]
+        public void CanSaveAfterChange()
+        {
+            IStockRepository repository = new FileStockRepository(repositoryDir);
+            repository.SaveStock(yhoo);
+            yhoo.NumShares = 120;
+            repository.SaveStock(yhoo);
 
-        //    IStockRepository newRepository = new FileStockRepository(repositoryDir);
-        //    Stock loaded = newRepository.LoadStock(yhoo.Id);
-        //    Assert.AreEqual(120, loaded.NumShares);
-        //}
+            IStockRepository newRepository = new FileStockRepository(repositoryDir);
+            Stock loaded = newRepository.LoadStock(yhoo.Id);
+            Assert.AreEqual(120, loaded.NumShares);
+        }
 
-        //[TestMethod]
-        //public void CanClearRepository()
-        //{
-        //    IStockRepository repository = new FileStockRepository(repositoryDir);
-        //    repository.SaveStock(yhoo);
-        //    repository.SaveStock(hp);
-        //    repository.Clear();
-        //    ICollection stocks;
-        //    stocks = repository.FindAllStocks();
-        //    Assert.AreEqual(0, stocks.Count);
-        //}
-        //[TestMethod]
-        //public void CanFindAllStocks()
-        //{
-        //    IStockRepository repository = new FileStockRepository(repositoryDir);
-        //    ICollection stocks;
-        //    stocks = repository.FindAllStocks();
-        //    Assert.AreEqual(0, stocks.Count);
+        [TestMethod]
+        public void CanClearRepository()
+        {
+            IStockRepository repository = new FileStockRepository(repositoryDir);
+            repository.SaveStock(yhoo);
+            repository.SaveStock(hp);
+            repository.Clear();
+            ICollection stocks;
+            stocks = repository.FindAllStocks();
+            Assert.AreEqual(0, stocks.Count);
+        }
 
-        //    repository.SaveStock(yhoo);
-        //    stocks = repository.FindAllStocks();
-        //    Assert.AreEqual(1, stocks.Count);
+        [TestMethod]
+        public void CanFindAllStocks()
+        {
+            IStockRepository repository = new FileStockRepository(repositoryDir);
+            ICollection stocks;
+            stocks = repository.FindAllStocks();
+            Assert.AreEqual(0, stocks.Count);
 
-        //    repository.SaveStock(hp);
-        //    stocks = repository.FindAllStocks();
-        //    Assert.AreEqual(2, stocks.Count);
-        //}
+            repository.SaveStock(yhoo);
+            stocks = repository.FindAllStocks();
+            Assert.AreEqual(1, stocks.Count);
+
+            repository.SaveStock(hp);
+            stocks = repository.FindAllStocks();
+            Assert.AreEqual(2, stocks.Count);
+        }
     }
 }
